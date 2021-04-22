@@ -20,8 +20,19 @@ app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 
+
+# Backend
+
+@app.errorhandler(500)
+def internal_error(error):
+	res = {'error': True, 'message': 'internal server error'}
+	return json.dumps(res)
+
+
+
 @app.route("/api/attractions")
 def attraction_page():
+	
 	page_num = request.args.get("page", 0)
 	page_num = int(page_num)
 	item_min = 1+12*page_num
@@ -33,12 +44,8 @@ def attraction_page():
 
 	json_data = {}
 	if keyword:
-		print(keyword)
-		print(page_num)
 		pattern = "LIKE '%" + str(keyword) + "%'" 
-		# sql = "select id, name, category, description, address, transport, mrt, latitude, longitude, images from travel where id between %s and %s and name %s order by id"
 		sql = "select id, name, category, description, address, transport, mrt, latitude, longitude, images from travel where name " + pattern + " and id between " + str(item_min) + " and " + str(item_max) + " order by id"
-		# db_cursor.execute(sql,(item_min,item_max, pattern))
 		db_cursor.execute(sql)
 	else:
 		sql = "select id, name, category, description, address, transport, mrt, latitude, longitude, images from travel where id between %s and %s order by id"
@@ -47,7 +54,7 @@ def attraction_page():
 	res = db_cursor.fetchall()
 	json_data = {"nextPage": page_num+1, "data":res}
 
-	return render_template("attraction.html",result=json_data)
+	return render_template("attraction.html",result=json.dumps(json_data))
 
 
 
