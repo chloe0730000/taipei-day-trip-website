@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
-
-This is a temporary script file.
-
 # process json file and import to mysql database
 1. connect to mysql to create table and schema first
 2. dump json data to mysql db
@@ -14,6 +10,7 @@ This is a temporary script file.
 '''
 
 // create table
+
 create table travel 
 (id bigint primary key auto_increment,
 transport text ,
@@ -50,13 +47,17 @@ describe travel;
 import pymysql
 import pandas as pd
 import json
-data = pd.read_json("/Users/chloe/Documents/GitHub/taipei-day-trip-website/data/taipei-attractions.json")
+
+json_file = '/Users/chloe/Documents/GitHub/taipei-day-trip-website/data/taipei-attractions.json'
+data = pd.read_json(json_file)
 data = data["result"]["results"]
-df = pd.DataFrame.from_dict(data, orient='columns')
+
+# convert dictionary to dataframe 
+# df = pd.DataFrame.from_dict(data, orient='columns')
 
 mydb = pymysql.connect(host='localhost',
                        user='root',
-                       passwd='Chloe951753@',
+                       passwd='123456',
                        db='website')
 cursor = mydb.cursor()
 
