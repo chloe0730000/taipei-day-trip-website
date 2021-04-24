@@ -9,6 +9,11 @@
 
 '''
 
+// create database
+create database website;
+use website;
+
+
 // create table
 
 create table travel 
@@ -47,13 +52,22 @@ describe travel;
 import pymysql
 import pandas as pd
 import json
+import os
+from pathlib import Path
 
-json_file = '/Users/chloe/Documents/GitHub/taipei-day-trip-website/data/taipei-attractions.json'
+
+# relative path
+base_path = os.path.dirname(os.path.abspath(__file__)) 
+json_file = base_path+"/taipei-attractions.json"
+
+#json_file = '/Users/chloe/Documents/GitHub/taipei-day-trip-website/data/taipei-attractions.json'
 data = pd.read_json(json_file)
 data = data["result"]["results"]
+print(data)
 
 # convert dictionary to dataframe 
 # df = pd.DataFrame.from_dict(data, orient='columns')
+
 
 mydb = pymysql.connect(host='localhost',
                        user='root',
