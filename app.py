@@ -49,8 +49,8 @@ def attraction_api_page():
 	db_cursor.execute(sql)
 	total_rows = db_cursor.fetchall()[0]["count(id)"]
 
-	if page_num>=np.ceil(float(total_rows)/12):
-		next_page_num = "null"
+	if page_num>=(np.ceil(float(total_rows)/12)-1):
+		next_page_num = None
 	else:
 		next_page_num =  page_num+1
 	   
