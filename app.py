@@ -5,11 +5,12 @@ import collections
 import numpy as np
 
 # connect with local mysql database 
+# password for ec2 is <blank> local is different
 try:
     db_connection = connect(
         host= "localhost",
         user= "root",
-        password= "123456",
+        password= "",
         database="website")
     print(db_connection)
 except Error as e:

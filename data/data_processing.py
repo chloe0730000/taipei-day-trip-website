@@ -68,10 +68,10 @@ print(data)
 # convert dictionary to dataframe 
 # df = pd.DataFrame.from_dict(data, orient='columns')
 
-
+# password for ec2 is <blank> local is different
 mydb = pymysql.connect(host='localhost',
                        user='root',
-                       passwd='123456',
+                       passwd='',
                        db='website')
 cursor = mydb.cursor()
 
