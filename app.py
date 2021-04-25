@@ -38,35 +38,48 @@ def attraction_api_page():
 	
 	page_num = request.args.get("page", 0)
 	page_num = int(page_num)
-	item_min = 1+12*page_num
-	item_max = 12+12*page_num
+	offset_num = 12*page_num
 
 	keyword = request.args.get("keyword")
 	db_cursor = db_connection.cursor(buffered=True , dictionary=True) # extract value of specific column
- 
-	
+
+
 	# check total page to decide next page number
-	sql = "select count(id) from travel"
-	db_cursor.execute(sql)
-	total_rows = db_cursor.fetchall()[0]["count(id)"]
+	if keyword:
+		pattern = "LIKE '%" + str(keyword) + "%'" 
+		sql = "select count(id) from travel where name " + pattern
+		db_cursor.execute(sql)
+		total_rows = db_cursor.fetchall()[0]["count(id)"]		
+	else:
+		sql = "select count(id) from travel"
+		db_cursor.execute(sql)
+		total_rows = db_cursor.fetchall()[0]["count(id)"]
+
 
 	if page_num>=(np.ceil(float(total_rows)/12)-1):
 		next_page_num = None
 	else:
-		next_page_num =  page_num+1
-	   
+		next_page_num =  page_num+1	
 
-	json_data = {}
+
 	if keyword:
 		pattern = "LIKE '%" + str(keyword) + "%'" 
-		sql = "select id, name, category, description, address, transport, mrt, latitude, longitude, images from travel where name " + pattern + " and id between " + str(item_min) + " and " + str(item_max) + " order by id"
-		db_cursor.execute(sql)
+		if offset_num==0:
+			sql = "select id, name, category, description, address, transport, mrt, latitude, longitude, images from travel where name " + pattern + " limit 12" 
+		else:
+			sql = "select id, name, category, description, address, transport, mrt, latitude, longitude, images from travel where name " + pattern + " limit " + str(offset_num) +" , 12"
 	else:
-		sql = "select id, name, category, description, address, transport, mrt, latitude, longitude, images from travel where id between %s and %s order by id"
-		db_cursor.execute(sql,(item_min,item_max))
+		if offset_num==0:
+			sql = "select id, name, category, description, address, transport, mrt, latitude, longitude, images from travel limit 12"
+		else:
+			sql = "select id, name, category, description, address, transport, mrt, latitude, longitude, images from travel limit " + str(offset_num) + " , 12"
+		 
+	db_cursor.execute(sql)
 
+	
 	res = db_cursor.fetchall()
 	json_data = {"nextPage": next_page_num, "data":res}
+
 
 	return render_template("attraction.html",result=json.dumps(json_data))
 
