@@ -9,6 +9,7 @@
     <title>台北一日遊</title>
 </head>
 <body>
+    <script src="parsing_data.js"></script>
     <div class="nav">
         <div class="nav-content">
             <span class="nav-title">台北一日遊</span>
@@ -21,22 +22,25 @@
 
     <div class="banner">
         <div class="banner-content">
-            <div class='banner-title'>輕鬆享受台北一日悠閒</div>
-            <div class="banner-subtitle">探索每個角落，體驗城市的深度旅遊行程</div>
-            <div class="banner-image">
-                <img src="welcome.png" alt="">
+            <div>
+                <p class='banner-title'>輕鬆享受台北一日悠閒</p>
+                <p class="banner-subtitle">探索每個角落，體驗城市的深度旅遊行程</p>
+                <div class="banner-search">
+                    <input type="text" placeholder="輸入景點名稱查詢">
+                    <button type='submit' class="banner-button">
+                        <img src="search.png" alt="">
+                    </button>
+                </div>
             </div>
-            <form action="">
-                <input type="text" class="banner-search" placeholder="輸入景點名稱查詢">
-                <span class="banner-button">
-                    <img src="search.png" alt="">
-                </span>
-            </form>
-
         </div>
-
-
+        <div class="banner-image">
+            <img src="welcome.png" alt="">
+        </div>
     </div>
+    
+    <table>
+    </table> 
+
     
 </body>
 </html>

@@ -45,14 +45,26 @@ ul.nav-item li {
     width:1920px;
     height:320px;
     background: linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
+    display:flex;
+    /* vertical center elements in banner */
+    align-items: center;  
+    justify-content: center; 
+    /* flex-direction: row-reverse; */
 }
+
+
 
 .banner-content{
     width:1200px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
+
+}
+
+
+.banner-image {
+    position:absolute;
+    width: 650px;
+    height: 320px;
+    left: 1038px;
 
 }
 
@@ -63,7 +75,6 @@ ul.nav-item li {
     font-size: 28px;
     color: #F8F8F8;
     text-shadow: 0px 0px 30px #AABBCC;
-    
 }
 
 .banner-subtitle{
@@ -73,29 +84,19 @@ ul.nav-item li {
     font-size: 16px;
     color: #F8F8F8;
     margin-top: 15px;
-
-}
-
-.banner-image{
-    width:100%;
-    height:100%;
-    position:static;
-    left: 1038px;
-
-}
-
-
-form{
-    display: inline-block;
-    height:46px;
 }
 
 .banner-search{
-    margin-top: 25px;
-    width: 400px;
-    height: 46px;   
-    color: #FFFFFF;
+    margin-top:25px;
 }
+
+input {
+    width: 400px;
+    height: 46px;
+    color: #757575;
+    float:left;
+}
+
 
 input::placeholder{
     font-family: Noto Sans TC;
@@ -104,19 +105,17 @@ input::placeholder{
     font-size: 16px;
     color: #757575;
     padding: 15px;
-
 }
 
 .banner-button{
-    display:inline-block;
-    line-height: 46px;
     width: 60px;
-    /* height: 46px; */
+    height:46px;
     background:#448899;
 }
 
-img{
+
+button>img {
     width:30px;
     height:30px;
-
 }
+
