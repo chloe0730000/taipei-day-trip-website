@@ -4,17 +4,9 @@ from mysql.connector import connect, Error
 import collections
 import numpy as np
 
-# connect with local mysql database 
+# connect with local mysql database in each route since ec2 will disconnect every 8 hours so need to initiate connection in each part not in outer code
 # password for ec2 is <blank> local is different
-try:
-    db_connection = connect(
-        host= "localhost",
-        user= "root",
-        password= "",
-        database="website")
-    print(db_connection)
-except Error as e:
-    print(e)
+
 
 
 
@@ -35,6 +27,16 @@ def internal_error(error):
 
 @app.route("/api/attractions")
 def attraction_api_page():
+
+	try:
+		db_connection = connect(
+			host= "localhost",
+			user= "root",
+			password= "",
+			database="website")
+		print(db_connection)
+	except Error as e:
+		print(e)	
 	
 	page_num = request.args.get("page", 0)
 	page_num = int(page_num)
@@ -80,6 +82,8 @@ def attraction_api_page():
 	res = db_cursor.fetchall()
 	json_data = {"nextPage": next_page_num, "data":res}
 
+	db_cursor.close()
+
 
 	return render_template("attraction.html",result=json.dumps(json_data))
 
@@ -88,11 +92,23 @@ def attraction_api_page():
 @app.route("/api/attraction/<attractionId>")
 def attraction_api_page_id(attractionId):
 
+	try:
+		db_connection = connect(
+			host= "localhost",
+			user= "root",
+			password= "",
+			database="website")
+		print(db_connection)
+	except Error as e:
+		print(e)		
+
 	db_cursor = db_connection.cursor(buffered=True , dictionary=True) # extract value of specific column
 	sql = "select id, name, category, description, address, transport, mrt, latitude, longitude, images from travel where id = " + str(attractionId)
 	db_cursor.execute(sql)
 
 	res = db_cursor.fetchall()
+
+	db_cursor.close()
 
 	if res:
 		json_data = {"data":res}
