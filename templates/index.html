@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <title>台北一日遊</title>
 </head>
 <body>
-    <script src="parsing_data.js"></script>
+    <script src="{{ url_for('static', filename='parsing_data15.js') }}"></script>
+    <!-- <script src="parsing_data3.js"></script> -->
     <div class="nav">
         <div class="nav-content">
             <span class="nav-title">台北一日遊</span>
@@ -28,13 +29,13 @@
                 <div class="banner-search">
                     <input type="text" placeholder="輸入景點名稱查詢">
                     <button type='submit' class="banner-button">
-                        <img src="search.png" alt="">
+                        <img src="{{ url_for('static', filename='search.png')}}" alt="">
                     </button>
                 </div>
             </div>
         </div>
         <div class="banner-image">
-            <img src="welcome.png" alt="">
+            <img src="{{ url_for('static', filename='welcome.png')}}" alt="">
         </div>
     </div>
     

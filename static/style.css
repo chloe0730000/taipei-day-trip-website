@@ -119,3 +119,10 @@ button>img {
     height:30px;
 }
 
+table {
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    border-spacing: 30px;
+    width: 1200px;
+}

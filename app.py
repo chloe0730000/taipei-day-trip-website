@@ -85,7 +85,7 @@ def attraction_api_page():
 	db_cursor.close()
 
 
-	return render_template("attraction.html",result=json.dumps(json_data))
+	return render_template("attraction.html",result=json.dumps(json_data,ensure_ascii=False))
 
 
 
@@ -112,7 +112,7 @@ def attraction_api_page_id(attractionId):
 
 	if res:
 		json_data = {"data":res}
-		return render_template("attraction.html",result=json.dumps(json_data))
+		return render_template("attraction.html",result=json.dumps(json_data,ensure_ascii=False))
 	else:
 		res = {'error': True, 'message': '景點編號不正確'}
 		return json.dumps(res),400
