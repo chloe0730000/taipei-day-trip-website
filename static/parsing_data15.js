@@ -1,7 +1,7 @@
 
 let request = new XMLHttpRequest();
 // handle cross original resource sharing 
-request.open('GET', 'http://3.128.124.38:3000/api/attractions', true);
+request.open('GET', 'http://0.0.0.0:3000/', true);
 
 
 
