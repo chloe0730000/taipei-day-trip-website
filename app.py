@@ -21,7 +21,7 @@ app.config["TEMPLATES_AUTO_RELOAD"]=True
 def internal_error(error):
 	res = {'error': True, 
         'message': 'internal server error'}
-	return json.dumps(res)
+	return jsonify(res)
 
 
 
@@ -86,7 +86,7 @@ def attraction_api_page():
 
 
 	# return render_template("attraction.html",result=json.dumps(json_data,ensure_ascii=False))
-	return json.dumps(json_data)
+	return jsonify(json_data)
 
 
 
@@ -114,10 +114,10 @@ def attraction_api_page_id(attractionId):
 	if res:
 		json_data = {"data":res}
 		# return render_template("attraction.html",result=json.dumps(json_data,ensure_ascii=False))
-		return json.dumps(json_data)
+		return jsonify(json_data)
 	else:
 		res = {'error': True, 'message': '景點編號不正確'}
-		return json.dumps(res),400
+		return jsonify(res),400
 
 
 
