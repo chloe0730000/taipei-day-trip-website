@@ -14,7 +14,6 @@ app.config["TEMPLATES_AUTO_RELOAD"]=True
 # connect with local mysql database in each route since ec2 will disconnect every 8 hours so need to initiate connection in each part not in outer code
 # password for ec2 is <blank> local is different
 
-db_password = "Chloe951753@"
 
 # Backend
 
@@ -33,7 +32,7 @@ def attraction_api_page():
 		db_connection = connect(
 			host= "localhost",
 			user= "root",
-			password= db_password,
+			password= "",
 			database="website")
 		print(db_connection)
 	except Error as e:
@@ -87,7 +86,7 @@ def attraction_api_page():
 
 
 	# return render_template("attraction.html",result=jsonify(json_data))
-	return jsonify(json_data)
+	return json.dumps(json_data)
 
 
 @app.route("/api/attraction/<attractionId>")
@@ -97,7 +96,7 @@ def attraction_api_page_id(attractionId):
 		db_connection = connect(
 			host= "localhost",
 			user= "root",
-			password= db_password,
+			password= "",
 			database="website")
 		print(db_connection)
 	except Error as e:
@@ -113,7 +112,7 @@ def attraction_api_page_id(attractionId):
 
 	if res:
 		json_data = {"data":res}
-		return render_template("attraction.html",result=json.dumps(json_data,ensure_ascii=False))
+		return json.dumps(json_data)
 	else:
 		res = {'error': True, 'message': '景點編號不正確'}
 		return json.dumps(res),400
