@@ -7,26 +7,10 @@ request.open('GET', 'http://3.128.124.38:3000/api/attractions', true);
 
 request.onload = function() {
     if (this.status >= 200 && this.status < 400) {
-      let res = request.responseText;
-      // alert(res)
-      alert(res)
-      console.log(res.data);
-      console.log(res["data"]);
-      // console.log(data.data)
-      // data = data["data"];
-      // console.log(data);
-
-
-
-
-      /*
+      
       let data = JSON.parse(this.response);
-      console.log(data);
       data = data["data"];
-      console.log(data);
 
-      
-      
       let tbl = document.querySelector("table");
   
       // create table with 3*4 format
@@ -37,7 +21,9 @@ request.onload = function() {
   
           // image
           let image = document.createElement("img");
-          image.src = data[4*i+j].images.split(",")[0]
+          // output as string
+          output_image = data[4*i+j].images.replace(/'/g, '"');
+          image.src = JSON.parse(output_image)[0];
           image.className = "img-size";
   
           // image title
@@ -53,7 +39,6 @@ request.onload = function() {
         tbl.appendChild(row);
       }
       
-    */
 
     } 
   };

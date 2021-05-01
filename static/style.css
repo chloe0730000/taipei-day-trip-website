@@ -126,3 +126,12 @@ table {
     border-spacing: 30px;
     width: 1200px;
 }
+
+
+
+.img-size {
+    display: block;
+    width: 270px;
+    /* height: auto; */
+    height: 202px;
+}
